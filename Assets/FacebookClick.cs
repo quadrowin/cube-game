@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class FacebookClick : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	void OnMouseUp () {
+        Application.OpenURL("https://facebook.com");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
