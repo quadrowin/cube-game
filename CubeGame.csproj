@@ -80,6 +80,8 @@
   <ItemGroup>
     <Compile Include="Assets\CubeJump.cs" />
     <Compile Include="Assets\FacebookClick.cs" />
+    <Compile Include="Assets\FloorReminder.cs" />
+    <Compile Include="Assets\Game Scripts\SpawnBlocks.cs" />
     <Compile Include="Assets\Menu Scripts\MainMenuClick.cs" />
     <Compile Include="Assets\RestartClick.cs" />
     <Compile Include="Assets\TapToPlay.cs" />

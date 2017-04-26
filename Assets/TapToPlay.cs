@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TapToPlay : MonoBehaviour {
 
+    const int STEP_NONE = 0;
+    const int STEP_TO_ZERO = 1;
+    const int STEP_TO_START = 2;
+
     public GameObject buttons;
     public GameObject startGameButton;
     public GameObject mainCube;
@@ -16,7 +20,8 @@ public class TapToPlay : MonoBehaviour {
     private Quaternion zeroRoration = Quaternion.identity;
     private Vector3 zeroPosition = new Vector3(0, -1, 0);
 
-    private Vector3 startCubePosition = new Vector3(-2, 3, 0);
+    // like values in CubeJump
+    private Vector3 startCubePosition = new Vector3(-2, 2.5f, 0);
     private Vector3 startFloorPosition = new Vector3(-2, 1, 0);
 
     // Use this for initialization
@@ -32,21 +37,22 @@ public class TapToPlay : MonoBehaviour {
         mainCube.GetComponent<Animation>().Stop();
         mainCube.GetComponent<Rigidbody>().useGravity = false;
         mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        gameStartStep = 1;
+        mainCube.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        gameStartStep = STEP_TO_ZERO;
         gameStartTime = Time.fixedTime;
     }
 
     void Update()
     {
-        if (gameStartStep == 1)
+        if (gameStartStep == STEP_TO_ZERO)
         {
             // Выравниваем главный куб по центру
             Transform tr = mainCube.GetComponent<Transform>();
             mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            mainCube.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             float gameStartPast = Time.fixedTime - gameStartTime;
             if (gameStartPast < gameStartDuration)
             {
-                mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 tr.rotation = Quaternion.Lerp(tr.rotation, zeroRoration, gameStartPast / gameStartDuration / 2);
                 tr.position = Vector3.Lerp(tr.position, zeroPosition, gameStartPast / gameStartDuration / 2);
                 return;
@@ -54,18 +60,20 @@ public class TapToPlay : MonoBehaviour {
 
             tr.rotation = zeroRoration;
             tr.position = zeroPosition;
-            gameStartStep = 2;
+
+            gameStartStep = STEP_TO_START;
             gameStartTime = Time.fixedTime;
             print("Cube initialized 1");
             return;
         }
-        if (gameStartStep == 2)
+        if (gameStartStep == STEP_TO_START)
         {
             // двигаем главный куб и первую плашку влево вверх
             mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
             Transform cubeTr = mainCube.GetComponent<Transform>();
             Transform floorTr = floorBlock.GetComponent<Transform>();
             mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            mainCube.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             float gameStartPast = Time.fixedTime - gameStartTime;
             if (gameStartPast < gameStartDuration)
             {
@@ -80,9 +88,33 @@ public class TapToPlay : MonoBehaviour {
             mainCube.GetComponent<Rigidbody>().position = startCubePosition;
             mainCube.GetComponent<Rigidbody>().rotation = zeroRoration;
             mainCube.GetComponent<Rigidbody>().useGravity = true;
-            gameStartStep = 0;
+            gameStartStep = STEP_NONE;
             GetComponent<CubeJump>().active = true;
+            GetComponent<SpawnBlocks>().enabled = true;
         }
     }
-	
+
+    public void reinitUpdate(float timeDelta, float deltaX)
+    {
+        GameObject floor = mainCube.GetComponent<FloorReminder>().GetLastFloor();
+        if (!floor)
+        {
+            floor = floorBlock;
+        }
+        var newCubePosition = new Vector3(
+            startCubePosition.x + deltaX,
+            startCubePosition.y,
+            startCubePosition.z
+        );
+        if (timeDelta >= 1)
+        {
+            mainCube.transform.localPosition = newCubePosition;
+            floor.transform.localPosition = startFloorPosition;
+        } else
+        {
+            mainCube.transform.localPosition = Vector3.Lerp(mainCube.transform.localPosition, newCubePosition, timeDelta);
+            floor.transform.localPosition = Vector3.Lerp(floor.transform.localPosition, startFloorPosition, timeDelta);
+        }
+    }
+
 }
