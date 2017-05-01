@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnBlocks : MonoBehaviour {
 
+    public GameObject gameSpace;
     public GameObject block;
     private GameObject blockInst;
     private float spawnStartTime;
@@ -36,7 +37,8 @@ public class SpawnBlocks : MonoBehaviour {
     {
         zeroPosition = new Vector3(3, -9, 0);
         blockInst = Instantiate(block, zeroPosition, Quaternion.identity) as GameObject;
-        targetPosition = new Vector3(Random.Range(1, 3), Random.Range(-1, 1), 0);
+        blockInst.transform.SetParent(gameSpace.transform);
+        targetPosition = new Vector3(Random.Range(1, 3), Random.Range(-2, 0), 0);
         spawnStartTime = Time.fixedTime;
         return blockInst;
     }

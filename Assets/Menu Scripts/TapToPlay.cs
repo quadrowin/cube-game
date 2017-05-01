@@ -8,10 +8,18 @@ public class TapToPlay : MonoBehaviour {
     const int STEP_TO_ZERO = 1;
     const int STEP_TO_START = 2;
 
+    const int STUDY_STATE_NONE = 0;
+    const int STUDY_STATE_ACTIVE = 1;
+    const int STUDY_STATE_SHOWED = 2;
+
     public GameObject buttons;
+    public GameObject gameName;
+    public GameObject howToPlayHint;
     public GameObject startGameButton;
     public GameObject mainCube;
     public GameObject floorBlock;
+    public GameObject currentScores;
+    public GameObject recordScores;
 
     private bool clicked = false;
     private int gameStartStep = 0;
@@ -19,6 +27,8 @@ public class TapToPlay : MonoBehaviour {
     private float gameStartDuration = 1f;
     private Quaternion zeroRoration = Quaternion.identity;
     private Vector3 zeroPosition = new Vector3(0, -1, 0);
+    private Vector3 gameNameInGamePosition = new Vector3(0, 300, 0);
+    private int studyState = STUDY_STATE_NONE;
 
     // like values in CubeJump
     private Vector3 startCubePosition = new Vector3(-2, 2.5f, 0);
@@ -40,6 +50,25 @@ public class TapToPlay : MonoBehaviour {
         mainCube.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         gameStartStep = STEP_TO_ZERO;
         gameStartTime = Time.fixedTime;
+        howToPlayHint.SetActive(true);
+    }
+
+    private void OnMouseUp()
+    {
+        if (studyState == STUDY_STATE_NONE && clicked)
+        {
+            studyState = STUDY_STATE_ACTIVE;
+            howToPlayHint.SetActive(true);
+            currentScores.SetActive(true);
+            recordScores.SetActive(true);
+            return;
+        }
+        if (studyState == STUDY_STATE_ACTIVE)
+        {
+            studyState = STUDY_STATE_SHOWED;
+            howToPlayHint.SetActive(false);
+            return;
+        }
     }
 
     void Update()
@@ -53,13 +82,14 @@ public class TapToPlay : MonoBehaviour {
             float gameStartPast = Time.fixedTime - gameStartTime;
             if (gameStartPast < gameStartDuration)
             {
-                tr.rotation = Quaternion.Lerp(tr.rotation, zeroRoration, gameStartPast / gameStartDuration / 2);
-                tr.position = Vector3.Lerp(tr.position, zeroPosition, gameStartPast / gameStartDuration / 2);
+                float timeFactor = gameStartPast / gameStartDuration / 2;
+                tr.localRotation = Quaternion.Lerp(tr.localRotation, zeroRoration, timeFactor);
+                tr.localPosition = Vector3.Lerp(tr.localPosition, zeroPosition, timeFactor);
+                gameName.GetComponent<RectTransform>().localPosition = Vector3.Lerp(gameName.GetComponent<RectTransform>().localPosition, gameNameInGamePosition, timeFactor);
                 return;
             }
 
-            tr.rotation = zeroRoration;
-            tr.position = zeroPosition;
+            tr.SetPositionAndRotation(zeroPosition, zeroRoration);
 
             gameStartStep = STEP_TO_START;
             gameStartTime = Time.fixedTime;
@@ -77,9 +107,10 @@ public class TapToPlay : MonoBehaviour {
             float gameStartPast = Time.fixedTime - gameStartTime;
             if (gameStartPast < gameStartDuration)
             {
-                cubeTr.rotation = zeroRoration;
-                cubeTr.position = Vector3.Lerp(cubeTr.position, startCubePosition, gameStartPast / gameStartDuration / 2);
-                floorTr.position = Vector3.Lerp(floorTr.position, startFloorPosition, gameStartPast / gameStartDuration / 2);
+                float timeFactor = gameStartPast / gameStartDuration / 2;
+                cubeTr.localRotation = zeroRoration;
+                cubeTr.localPosition = Vector3.Lerp(cubeTr.localPosition, startCubePosition, timeFactor);
+                floorTr.localPosition = Vector3.Lerp(floorTr.localPosition, startFloorPosition, timeFactor);
                 return;
             }
 
