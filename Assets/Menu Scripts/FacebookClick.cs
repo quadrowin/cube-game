@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FacebookClick : MonoBehaviour {
 
-	void OnMouseUp () {
+	void OnMouseUpAsButton () {
         Application.OpenURL("https://facebook.com");
 	}
 

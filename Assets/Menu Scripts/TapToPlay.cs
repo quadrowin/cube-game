@@ -20,6 +20,7 @@ public class TapToPlay : MonoBehaviour {
     public GameObject floorBlock;
     public GameObject currentScores;
     public GameObject recordScores;
+    public GameObject cheeseScores;
 
     private bool clicked = false;
     private int gameStartStep = 0;
@@ -61,6 +62,7 @@ public class TapToPlay : MonoBehaviour {
             howToPlayHint.SetActive(true);
             currentScores.SetActive(true);
             recordScores.SetActive(true);
+            cheeseScores.SetActive(true);
             return;
         }
         if (studyState == STUDY_STATE_ACTIVE)

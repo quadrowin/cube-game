@@ -6,13 +6,12 @@ public class FloorReminder : MonoBehaviour {
 
     private GameObject lastFloor;
 
-	// Use this for initialization
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.name == "FloorBlock")
         {
             lastFloor = collision.gameObject;
         }
-        if (collision.gameObject.name.IndexOf("TemplateFloor") == 0)
+        if (collision.gameObject.name == "Floor(Clone)")
         {
             lastFloor = collision.gameObject;
         }

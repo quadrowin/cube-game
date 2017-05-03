@@ -7,6 +7,7 @@ public class CubeJump : MonoBehaviour
 {
 
     const string PREFS_RECORD_SCORES = "recordScores";
+    const string PREFS_CHEESE_SCORES = "scheeseScores";
 
     const int STATE_NONE = 0;
     const int STATE_SCRATCHING = 1;
@@ -22,6 +23,7 @@ public class CubeJump : MonoBehaviour
     public GameObject looseButtons;
     public Text currentScoresView;
     public Text recordScoresView;
+    public Text cheeseScoresView;
     /// <summary>
     /// Пол в момент начала прыжка
     /// </summary>
@@ -37,6 +39,7 @@ public class CubeJump : MonoBehaviour
     private int state = STATE_NONE;
     private int currentScores = 0;
     private int recordScores = 0;
+    private int cheeseScores = 0;
 
     // like values in TapToPlay
     private Vector3 removeFloorPosition = new Vector3(-7, 11, 0);
@@ -45,6 +48,7 @@ public class CubeJump : MonoBehaviour
     {
         recordScores = PlayerPrefs.GetInt(PREFS_RECORD_SCORES);
         recordScoresView.text = "Record: " + recordScores;
+        cheeseScores = PlayerPrefs.GetInt(PREFS_CHEESE_SCORES);
     }
 
     public void FixedUpdate()
@@ -78,14 +82,15 @@ public class CubeJump : MonoBehaviour
 
 
         Rigidbody rb = mainCube.GetComponent<Rigidbody>();
+        FloorReminder fr = mainCube.GetComponent<FloorReminder>();
 
-        if (state == STATE_JUMPING && mainCube.GetComponent<Rigidbody>().IsSleeping())
+        if (state == STATE_JUMPING && rb.IsSleeping())
         {
             mainCube.transform.rotation = Quaternion.identity;
             reinitStartTime = Time.fixedTime;
             state = STATE_REINIT;
-            reinitDeltaX = mainCube.transform.localPosition.x - mainCube.GetComponent<FloorReminder>().GetLastFloor().transform.localPosition.x;
-            GameObject currentFloor = mainCube.GetComponent<FloorReminder>().GetLastFloor();
+            reinitDeltaX = mainCube.transform.localPosition.x - fr.GetLastFloor().transform.localPosition.x;
+            GameObject currentFloor = fr.GetLastFloor();
             if (currentFloor == startFloor)
             {
                 print("same floor");
@@ -99,7 +104,7 @@ public class CubeJump : MonoBehaviour
 
         if (state == STATE_REINIT)
         {
-            GameObject currentFloor = mainCube.GetComponent<FloorReminder>().GetLastFloor();
+            GameObject currentFloor = fr.GetLastFloor();
             if (currentFloor == startFloor)
             {
                 // блок не изменился, не было перепрыгивания на следующий
@@ -120,6 +125,12 @@ public class CubeJump : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void OnCheeseTake()
+    {
+        cheeseScores++;
+        cheeseScoresView.text = ": " + cheeseScores;
     }
 
     public void OnMouseDown()

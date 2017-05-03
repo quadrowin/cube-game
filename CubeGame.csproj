@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Game Scripts\CheeseEating.cs" />
     <Compile Include="Assets\Game Scripts\CubeJump.cs" />
     <Compile Include="Assets\Game Scripts\FloorReminder.cs" />
     <Compile Include="Assets\Game Scripts\SpawnBlocks.cs" />

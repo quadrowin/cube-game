@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class RestartClick : MonoBehaviour {
 	
 	// Update is called once per frame
-	void OnMouseUp () {
+	void OnMouseUpAsButton () {
         SceneManager.LoadScene("MainScene");
 	}
 
