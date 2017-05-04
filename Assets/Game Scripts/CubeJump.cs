@@ -32,6 +32,7 @@ public class CubeJump : MonoBehaviour
     public float minScratch = 0.4f;
     public float scratchSpeed = 0.5f;
     public float jumpAcceleration = 3f;
+    public AudioSource jumpSound;
     public float reinitDuration = 0.5f;
     public float reinitStartTime = 0;
     public float reinitDeltaX = 0;
@@ -156,6 +157,7 @@ public class CubeJump : MonoBehaviour
             float force = timeDelta;
             mainCube.GetComponent<Rigidbody>().AddRelativeForce(force, force, 0);
             GetComponent<SpawnBlocks>().enabled = true;
+            jumpSound.Play();
         }
     }
 

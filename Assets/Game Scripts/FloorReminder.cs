@@ -6,14 +6,13 @@ public class FloorReminder : MonoBehaviour {
 
     private GameObject lastFloor;
 
+    public AudioSource collisionSound;
+
 	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.name == "FloorBlock")
+		if (collision.gameObject.tag == Tags.FLOOR)
         {
             lastFloor = collision.gameObject;
-        }
-        if (collision.gameObject.name == "Floor(Clone)")
-        {
-            lastFloor = collision.gameObject;
+            collisionSound.Play();
         }
 	}
 
