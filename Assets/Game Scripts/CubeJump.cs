@@ -21,6 +21,7 @@ public class CubeJump : MonoBehaviour
     public GameObject mainCube;
     public GameObject mainButtons;
     public GameObject looseButtons;
+    public AudioClip looseSound;
     public Text currentScoresView;
     public Text recordScoresView;
     public Text cheeseScoresView;
@@ -32,7 +33,7 @@ public class CubeJump : MonoBehaviour
     public float minScratch = 0.4f;
     public float scratchSpeed = 0.5f;
     public float jumpAcceleration = 3f;
-    public AudioSource jumpSound;
+    public AudioClip jumpSound;
     public float reinitDuration = 0.5f;
     public float reinitStartTime = 0;
     public float reinitDeltaX = 0;
@@ -157,7 +158,7 @@ public class CubeJump : MonoBehaviour
             float force = timeDelta;
             mainCube.GetComponent<Rigidbody>().AddRelativeForce(force, force, 0);
             GetComponent<SpawnBlocks>().enabled = true;
-            jumpSound.Play();
+            mainCube.GetComponent<AudioSource>().PlayOneShot(jumpSound);
         }
     }
 
@@ -177,6 +178,8 @@ public class CubeJump : MonoBehaviour
         looseButtons.GetComponent<ScrollObjects>().MoveToPosition(
             new Vector3(0, -50, looseButtons.transform.localPosition.z)
         );
+
+        mainCube.GetComponent<AudioSource>().PlayOneShot(looseSound);
     }
 
     void setGameScores(int newValue)

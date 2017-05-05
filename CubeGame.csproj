@@ -83,12 +83,15 @@
     <Compile Include="Assets\Game Scripts\FloorReminder.cs" />
     <Compile Include="Assets\Game Scripts\SpawnBlocks.cs" />
     <Compile Include="Assets\Game Scripts\Tags.cs" />
+    <Compile Include="Assets\GooglePlayButton.cs" />
+    <Compile Include="Assets\Menu Scripts\AchievementsButton.cs" />
     <Compile Include="Assets\Menu Scripts\FacebookClick.cs" />
+    <Compile Include="Assets\Menu Scripts\LeadersButton.cs" />
     <Compile Include="Assets\Menu Scripts\MainMenuClick.cs" />
     <Compile Include="Assets\Menu Scripts\RestartClick.cs" />
     <Compile Include="Assets\Menu Scripts\ScrollObjects.cs" />
+    <Compile Include="Assets\Menu Scripts\SoundButton.cs" />
     <Compile Include="Assets\Menu Scripts\TapToPlay.cs" />
-    <Compile Include="Assets\SoundButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
