@@ -8,7 +8,7 @@ public class AchievementsButton : MonoBehaviour {
     {
         if (Social.localUser.authenticated)
         {
-            Social.ShowAchievementsUI();
+            PlayGames.ShowAchievemntsUI();
         }
         else
         {

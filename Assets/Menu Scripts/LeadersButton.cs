@@ -8,7 +8,7 @@ public class LeadersButton : MonoBehaviour {
     {
         if (Social.localUser.authenticated)
         {
-            Social.ShowLeaderboardUI();
+            PlayGames.ShowLoeaderboardUI();
         } else
         {
             print("localUser not authenticated");
