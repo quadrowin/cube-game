@@ -45,6 +45,7 @@ public class CubeJump : MonoBehaviour
 
     // like values in TapToPlay
     private Vector3 removeFloorPosition = new Vector3(-7, 11, 0);
+    private Vector3 jumpStartPosition = Vector3.zero;
 
     private void Start()
     {
@@ -99,6 +100,10 @@ public class CubeJump : MonoBehaviour
             }
             else
             {
+                var jumpDeltaHeight = jumpStartPosition.z - mainCube.transform.position.z;
+                PlayGames.AddScoreToLeaderboard(GPGSIds.leaderboard_jumping_off_height, Mathf.RoundToInt(jumpDeltaHeight * 100));
+                PlayGames.AddScoreToLeaderboard(GPGSIds.leaderboard_success_touchdowns, 1);
+                PlayGames.IncrementAchievement(GPGSIds.achievement_accurate_jumper, 1);
                 setGameScores(currentScores + 1);
             }
             return;
@@ -143,6 +148,7 @@ public class CubeJump : MonoBehaviour
         }
         if (mainCube.GetComponent<Rigidbody>().IsSleeping())
         {
+            jumpStartPosition = mainCube.transform.localPosition;
             startJumpTime = Time.time;
             startFloor = mainCube.GetComponent<FloorReminder>().GetLastFloor();
             state = STATE_SCRATCHING;

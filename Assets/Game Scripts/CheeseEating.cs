@@ -20,6 +20,8 @@ public class CheeseEating : MonoBehaviour {
             Destroy(other.gameObject, 1);
             cubeJumper.OnCheeseTake();
             eatingSound.Play();
+
+            PlayGames.IncrementAchievement(GPGSIds.achievement_cheese_taker, 1);
         }
     }
 
