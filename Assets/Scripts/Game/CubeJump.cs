@@ -23,6 +23,8 @@ public class CubeJump : MonoBehaviour
     public GameObject looseButtons;
     public AudioClip floorDownSound;
     public AudioClip looseSound;
+    public AudioClip eatingSound;
+    public AudioClip jumpSound;
     public Text currentScoresView;
     public Text recordScoresView;
     public Text cheeseScoresView;
@@ -34,7 +36,6 @@ public class CubeJump : MonoBehaviour
     public float minScratch = 0.4f;
     public float scratchSpeed = 0.5f;
     public float jumpAcceleration = 3f;
-    public AudioClip jumpSound;
     public float reinitDuration = 0.5f;
     public float reinitStartTime = 0;
     public float reinitDeltaX = 0;
@@ -140,7 +141,8 @@ public class CubeJump : MonoBehaviour
     {
         cheeseScores++;
         cheeseScoresView.text = ": " + cheeseScores;
-    }
+        mainCube.GetComponent<AudioSource>().PlayOneShot(eatingSound);
+}
 
     public void OnMouseDown()
     {

@@ -14,8 +14,8 @@ public class SoundButton : MonoBehaviour {
 	void Start () {
         soundEnabled = PlayerPrefs.GetInt(PREFS_SOUND_ENABLED, -1) != 0;
         transform.GetChild(0).gameObject.SetActive(!soundEnabled);
-        audioListener.enabled = soundEnabled;
-	}
+        AudioListener.volume = soundEnabled ? 1 : 0;
+    }
 
     void OnMouseUpAsButton()
     {
@@ -28,7 +28,7 @@ public class SoundButton : MonoBehaviour {
             PlayerPrefs.SetInt(PREFS_SOUND_ENABLED, 0);
         }
         transform.GetChild(0).gameObject.SetActive(!soundEnabled);
-        audioListener.enabled = soundEnabled;
+        AudioListener.volume = soundEnabled ? 1 : 0;
     }
 
 }

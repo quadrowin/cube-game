@@ -269,6 +269,7 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+    <Compile Include="Assets\Scripts\BuildTimeText.cs" />
     <Compile Include="Assets\Scripts\EscapeToQuit.cs" />
     <Compile Include="Assets\Scripts\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Game\CheeseEating.cs" />

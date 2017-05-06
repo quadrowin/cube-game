@@ -6,8 +6,6 @@ public class CheeseEating : MonoBehaviour {
 
     public CubeJump cubeJumper;
 
-    public AudioSource eatingSound;
-
     // Use this for initialization
     void OnTriggerEnter(Collider other)
     {
@@ -19,7 +17,6 @@ public class CheeseEating : MonoBehaviour {
             other.GetComponent<Animation>().Play();
             Destroy(other.gameObject, 1);
             cubeJumper.OnCheeseTake();
-            eatingSound.Play();
 
             PlayGames.IncrementAchievement(GPGSIds.achievement_cheese_taker, 1);
         }
