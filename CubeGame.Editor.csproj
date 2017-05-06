@@ -138,6 +138,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\VersionIncrementor.cs" />
     <Compile Include="Assets\GooglePlayGames\Editor\GPGSAndroidSetupUI.cs" />
     <Compile Include="Assets\GooglePlayGames\Editor\GPGSDependencies.cs" />
     <Compile Include="Assets\GooglePlayGames\Editor\GPGSDocsUI.cs" />
