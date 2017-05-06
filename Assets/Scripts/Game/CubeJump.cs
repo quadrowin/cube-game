@@ -21,6 +21,7 @@ public class CubeJump : MonoBehaviour
     public GameObject mainCube;
     public GameObject mainButtons;
     public GameObject looseButtons;
+    public AudioClip floorDownSound;
     public AudioClip looseSound;
     public Text currentScoresView;
     public Text recordScoresView;
@@ -105,6 +106,7 @@ public class CubeJump : MonoBehaviour
                 PlayGames.AddScoreToLeaderboard(GPGSIds.leaderboard_success_touchdowns, 1);
                 PlayGames.IncrementAchievement(GPGSIds.achievement_accurate_jumper, 1);
                 setGameScores(currentScores + 1);
+                mainCube.GetComponent<AudioSource>().PlayOneShot(floorDownSound);
             }
             return;
         }

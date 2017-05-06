@@ -78,14 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EscapeToQuit.cs" />
-    <Compile Include="Assets\GPGSIds.cs" />
-    <Compile Include="Assets\Game Scripts\CheeseEating.cs" />
-    <Compile Include="Assets\Game Scripts\CubeJump.cs" />
-    <Compile Include="Assets\Game Scripts\FloorReminder.cs" />
-    <Compile Include="Assets\Game Scripts\SpawnBlocks.cs" />
-    <Compile Include="Assets\Game Scripts\Tags.cs" />
-    <Compile Include="Assets\GooglePlayButton.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
@@ -277,22 +269,36 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
-    <Compile Include="Assets\Menu Scripts\AchievementsButton.cs" />
-    <Compile Include="Assets\Menu Scripts\FacebookClick.cs" />
-    <Compile Include="Assets\Menu Scripts\LeadersButton.cs" />
-    <Compile Include="Assets\Menu Scripts\MainMenuClick.cs" />
-    <Compile Include="Assets\Menu Scripts\PlayGames.cs" />
-    <Compile Include="Assets\Menu Scripts\RestartClick.cs" />
-    <Compile Include="Assets\Menu Scripts\ScrollObjects.cs" />
-    <Compile Include="Assets\Menu Scripts\SoundButton.cs" />
-    <Compile Include="Assets\Menu Scripts\TapToPlay.cs" />
+    <Compile Include="Assets\Scripts\AutoIncrementBuildVersion.cs" />
+    <Compile Include="Assets\Scripts\EscapeToQuit.cs" />
+    <Compile Include="Assets\Scripts\GPGSIds.cs" />
+    <Compile Include="Assets\Scripts\Game\CheeseEating.cs" />
+    <Compile Include="Assets\Scripts\Game\CubeJump.cs" />
+    <Compile Include="Assets\Scripts\Game\FloorReminder.cs" />
+    <Compile Include="Assets\Scripts\Game\SpawnBlocks.cs" />
+    <Compile Include="Assets\Scripts\Game\Tags.cs" />
+    <Compile Include="Assets\Scripts\GooglePlayButton.cs" />
+    <Compile Include="Assets\Scripts\Menu\AchievementsButton.cs" />
+    <Compile Include="Assets\Scripts\Menu\FacebookClick.cs" />
+    <Compile Include="Assets\Scripts\Menu\LeadersButton.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenuClick.cs" />
+    <Compile Include="Assets\Scripts\Menu\PlayGames.cs" />
+    <Compile Include="Assets\Scripts\Menu\RestartClick.cs" />
+    <Compile Include="Assets\Scripts\Menu\ScrollObjects.cs" />
+    <Compile Include="Assets\Scripts\Menu\SoundButton.cs" />
+    <Compile Include="Assets\Scripts\Menu\TapToPlay.cs" />
+    <Compile Include="Assets\Scripts\StartAppAd.cs" />
+    <Compile Include="Assets\Scripts\StartAppBackPlugin.cs" />
+    <Compile Include="Assets\Scripts\StartAppWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
     <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\MainLibProj\AndroidManifest.xml" />
+    <None Include="Assets\Resources\StartAppData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

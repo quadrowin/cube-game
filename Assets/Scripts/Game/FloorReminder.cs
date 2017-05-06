@@ -6,13 +6,10 @@ public class FloorReminder : MonoBehaviour {
 
     private GameObject lastFloor;
 
-    public AudioSource collisionSound;
-
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.tag == Tags.FLOOR)
         {
             lastFloor = collision.gameObject;
-            collisionSound.Play();
         }
 	}
 
