@@ -118,8 +118,8 @@ public class TapToPlay : MonoBehaviour {
 
             print("Cube initialized 2");
 
-            mainCube.GetComponent<Rigidbody>().position = startCubePosition;
-            mainCube.GetComponent<Rigidbody>().rotation = zeroRoration;
+            mainCube.transform.localPosition = startCubePosition;
+            mainCube.transform.localRotation = zeroRoration;
             mainCube.GetComponent<Rigidbody>().useGravity = true;
             gameStartStep = STEP_NONE;
             GetComponent<CubeJump>().active = true;

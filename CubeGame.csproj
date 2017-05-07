@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CubeSkinManager.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
@@ -270,9 +271,12 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
     <Compile Include="Assets\Scripts\BuildTimeText.cs" />
+    <Compile Include="Assets\Scripts\CubeSkinFocus.cs" />
+    <Compile Include="Assets\Scripts\CubeSkinSelect.cs" />
     <Compile Include="Assets\Scripts\EscapeToQuit.cs" />
     <Compile Include="Assets\Scripts\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Game\CheeseEating.cs" />
+    <Compile Include="Assets\Scripts\Game\CheeseManager.cs" />
     <Compile Include="Assets\Scripts\Game\CubeJump.cs" />
     <Compile Include="Assets\Scripts\Game\FloorReminder.cs" />
     <Compile Include="Assets\Scripts\Game\SpawnBlocks.cs" />
@@ -287,9 +291,13 @@
     <Compile Include="Assets\Scripts\Menu\ScrollObjects.cs" />
     <Compile Include="Assets\Scripts\Menu\SoundButton.cs" />
     <Compile Include="Assets\Scripts\Menu\TapToPlay.cs" />
+    <Compile Include="Assets\Scripts\OkStoreButton.cs" />
+    <Compile Include="Assets\Scripts\PanelBlinking.cs" />
     <Compile Include="Assets\Scripts\StartAppAd.cs" />
     <Compile Include="Assets\Scripts\StartAppBackPlugin.cs" />
     <Compile Include="Assets\Scripts\StartAppWrapper.cs" />
+    <Compile Include="Assets\Scripts\StoreButton.cs" />
+    <Compile Include="Assets\Scripts\WaterTextureMoving.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />

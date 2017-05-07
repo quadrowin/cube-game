@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheeseEating : MonoBehaviour {
 
-    public CubeJump cubeJumper;
+    public CubeJump CubeJumper;
 
     // Use this for initialization
     void OnTriggerEnter(Collider other)
@@ -16,7 +16,7 @@ public class CheeseEating : MonoBehaviour {
             other.GetComponent<BoxCollider>().enabled = false;
             other.GetComponent<Animation>().Play();
             Destroy(other.gameObject, 1);
-            cubeJumper.OnCheeseTake();
+            CubeJumper.OnCheeseTake();
 
             PlayGames.IncrementAchievement(GPGSIds.achievement_cheese_taker, 1);
         }

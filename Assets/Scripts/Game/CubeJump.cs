@@ -7,7 +7,6 @@ public class CubeJump : MonoBehaviour
 {
 
     const string PREFS_RECORD_SCORES = "recordScores";
-    const string PREFS_CHEESE_SCORES = "scheeseScores";
 
     const int STATE_NONE = 0;
     const int STATE_SCRATCHING = 1;
@@ -28,6 +27,9 @@ public class CubeJump : MonoBehaviour
     public Text currentScoresView;
     public Text recordScoresView;
     public Text cheeseScoresView;
+
+    public CheeseManager CheeseManager;
+
     /// <summary>
     /// Пол в момент начала прыжка
     /// </summary>
@@ -43,7 +45,7 @@ public class CubeJump : MonoBehaviour
     private int state = STATE_NONE;
     private int currentScores = 0;
     private int recordScores = 0;
-    private int cheeseScores = 0;
+    
 
     // like values in TapToPlay
     private Vector3 removeFloorPosition = new Vector3(-7, 11, 0);
@@ -53,7 +55,6 @@ public class CubeJump : MonoBehaviour
     {
         recordScores = PlayerPrefs.GetInt(PREFS_RECORD_SCORES);
         recordScoresView.text = "Record: " + recordScores;
-        cheeseScores = PlayerPrefs.GetInt(PREFS_CHEESE_SCORES);
     }
 
     public void FixedUpdate()
@@ -63,7 +64,7 @@ public class CubeJump : MonoBehaviour
             return;
         }
 
-        if (state == STATE_SCRATCHING && mainCube.transform.localScale.y > minScratch)
+        if (state == STATE_SCRATCHING)
         {
             scratchCube(-scratchSpeed);
             return;
@@ -91,7 +92,7 @@ public class CubeJump : MonoBehaviour
 
         if (state == STATE_JUMPING && rb.IsSleeping())
         {
-            mainCube.transform.rotation = Quaternion.identity;
+            mainCube.transform.localRotation = Quaternion.identity;
             reinitStartTime = Time.fixedTime;
             state = STATE_REINIT;
             reinitDeltaX = mainCube.transform.localPosition.x - fr.GetLastFloor().transform.localPosition.x;
@@ -102,7 +103,7 @@ public class CubeJump : MonoBehaviour
             }
             else
             {
-                var jumpDeltaHeight = jumpStartPosition.z - mainCube.transform.position.z;
+                var jumpDeltaHeight = jumpStartPosition.z - mainCube.transform.localPosition.z;
                 PlayGames.AddScoreToLeaderboard(GPGSIds.leaderboard_jumping_off_height, Mathf.RoundToInt(jumpDeltaHeight * 100));
                 PlayGames.AddScoreToLeaderboard(GPGSIds.leaderboard_success_touchdowns, 1);
                 PlayGames.IncrementAchievement(GPGSIds.achievement_accurate_jumper, 1);
@@ -139,10 +140,11 @@ public class CubeJump : MonoBehaviour
 
     public void OnCheeseTake()
     {
-        cheeseScores++;
+        CheeseManager.CheeseIncrement();
+        var cheeseScores = CheeseManager.GetCheeseScores();
         cheeseScoresView.text = ": " + cheeseScores;
         mainCube.GetComponent<AudioSource>().PlayOneShot(eatingSound);
-}
+    }
 
     public void OnMouseDown()
     {
@@ -206,8 +208,16 @@ public class CubeJump : MonoBehaviour
 
     void scratchCube(float delta)
     {
-        mainCube.transform.localPosition += new Vector3(0, delta * Time.deltaTime, 0);
-        mainCube.transform.localScale += new Vector3(0, delta * Time.deltaTime, 0);
+        var curScaleY = mainCube.transform.localScale.y;
+        var newScaleY = Mathf.Min(1, Mathf.Max(minScratch, curScaleY + delta * Time.deltaTime));
+        var deltaY = newScaleY - curScaleY;
+
+        mainCube.transform.localScale = new Vector3(1, newScaleY, 1);
+        mainCube.transform.localPosition = new Vector3(
+            mainCube.transform.localPosition.x, 
+            mainCube.transform.localPosition.y + deltaY, 
+            mainCube.transform.localPosition.z
+        );
     }
 
 }

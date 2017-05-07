@@ -21,7 +21,10 @@ public class GooglePlayButton : MonoBehaviour {
 
     void UpdateSelfState()
     {
-        cross.SetActive(!Social.localUser.authenticated);
+        if (cross != null)
+        {
+            cross.SetActive(!Social.localUser.authenticated);
+        }
     }
 
     public static void UpdateState()
