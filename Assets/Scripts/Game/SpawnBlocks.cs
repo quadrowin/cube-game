@@ -31,14 +31,11 @@ public class SpawnBlocks : MonoBehaviour {
         {
             spawnStartTime = 0;
             blockInst.transform.localPosition = targetPosition;
+            UpdateCheesePosition();
             return;
         }
         blockInst.transform.localPosition = Vector3.Lerp(zeroPosition, targetPosition, timeDelta / spawnDuration);
-        cheeseInst.transform.localPosition = new Vector3(
-            blockInst.transform.localPosition.x,
-            blockInst.transform.localPosition.y + 1,
-            blockInst.transform.localPosition.z
-        );
+        UpdateCheesePosition();
     }
 
     public GameObject SpawnNewBlock()
@@ -48,16 +45,25 @@ public class SpawnBlocks : MonoBehaviour {
         blockInst.transform.localPosition = zeroPosition;
         blockInst.transform.localRotation = Quaternion.identity;
         targetPosition = new Vector3(Random.Range(1, 3), Random.Range(-2, 0), 0);
-
+        UpdateCheesePosition();
         cheeseInst = Instantiate(cheese, blockInst.transform.parent) as GameObject;
+        
+        spawnStartTime = Time.fixedTime;
+        return blockInst;
+    }
+
+    void UpdateCheesePosition()
+    {
+        if (cheeseInst == null)
+        {
+            return;
+        }
         cheeseInst.transform.localPosition = new Vector3(
             blockInst.transform.localPosition.x,
             blockInst.transform.localPosition.y + 1,
             blockInst.transform.localPosition.z
         );
-        cheeseInst.transform.localRotation = Quaternion.identity;
-        spawnStartTime = Time.fixedTime;
-        return blockInst;
+        cheeseInst.transform.localRotation = blockInst.transform.localRotation;
     }
 
 }

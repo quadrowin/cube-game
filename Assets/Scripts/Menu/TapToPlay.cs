@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TapToPlay : MonoBehaviour {
 
@@ -20,7 +21,9 @@ public class TapToPlay : MonoBehaviour {
     public GameObject floorBlock;
     public GameObject currentScores;
     public GameObject recordScores;
+    public GameObject cheeseTitle;
     public GameObject cheeseScores;
+    public CheeseManager CheeseManager;
 
     private bool clicked = false;
     private int gameStartStep = 0;
@@ -58,10 +61,12 @@ public class TapToPlay : MonoBehaviour {
     {
         if (studyState == STUDY_STATE_NONE && clicked)
         {
+            cheeseScores.GetComponent<Text>().text = ": " + CheeseManager.GetCheeseScores();
             studyState = STUDY_STATE_ACTIVE;
             howToPlayHint.SetActive(true);
             currentScores.SetActive(true);
             recordScores.SetActive(true);
+            cheeseTitle.SetActive(true);
             cheeseScores.SetActive(true);
             return;
         }
@@ -142,10 +147,12 @@ public class TapToPlay : MonoBehaviour {
         if (timeDelta >= 1)
         {
             mainCube.transform.localPosition = newCubePosition;
+            mainCube.transform.localRotation = Quaternion.identity;
             floor.transform.localPosition = startFloorPosition;
         } else
         {
             mainCube.transform.localPosition = Vector3.Lerp(mainCube.transform.localPosition, newCubePosition, timeDelta);
+            mainCube.transform.localRotation = Quaternion.Lerp(mainCube.transform.localRotation, Quaternion.identity, timeDelta);
             floor.transform.localPosition = Vector3.Lerp(floor.transform.localPosition, startFloorPosition, timeDelta);
         }
     }

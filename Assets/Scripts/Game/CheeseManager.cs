@@ -12,8 +12,8 @@ public class CheeseManager : MonoBehaviour {
         cheeseScores = PlayerPrefs.GetInt(PREFS_CHEESE_SCORES);
     }
 	
-	public void CheeseIncrement () {
-        cheeseScores++;
+	public void CheeseIncrement (int val) {
+        cheeseScores += val;
         PlayerPrefs.SetInt(PREFS_CHEESE_SCORES, cheeseScores);
     }
 

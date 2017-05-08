@@ -21,13 +21,11 @@ public class StartAppAd : MonoBehaviour {
 #endif
     }
 
-#if UNITY_ANDROID
     public class VideoListenerImplementation : StartAppWrapper.VideoListener {
         public void onVideoCompleted() {
             // Grant user with the reward
         }
     }
-#endif
 
     void SetVideoListener()
     {
@@ -41,12 +39,13 @@ public class StartAppAd : MonoBehaviour {
 #endif
     }
 
-    public void PlayVideoWithReward()
+    public void PlayVideoWithReward(StartAppWrapper.VideoListener videoListener)
     {
 #if UNITY_ANDROID
         if (inited)
         {
             StartAppWrapper.showAd();
+            StartAppWrapper.setVideoListener(videoListener);
             StartAppWrapper.loadAd(StartAppWrapper.AdMode.REWARDED_VIDEO);
         }
 #endif

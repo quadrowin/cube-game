@@ -5,11 +5,12 @@ using UnityEngine;
 public class OkStoreButton : MonoBehaviour
 {
 
-    public StoreButton StoreButton;
+    public ShopScreen ShopScreen;
 
     void OnMouseUpAsButton()
     {
-        StoreButton.BackAsItWas();
+        transform.localScale = Vector3.one;
+        ShopScreen.BackScreenAsItWas();
     }
 
 }

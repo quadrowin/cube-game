@@ -8,7 +8,7 @@ public class CubeSkinFocus : MonoBehaviour {
 
 	public void SelectSkinOf(CubeSkinSelect skin)
     {
-        RectTransform rt = skin.gameObject.GetComponent<RectTransform>();
+        RectTransform rt = skin.GetComponent<RectTransform>();
         if (rt != null)
         {
             GetComponent<RectTransform>().localPosition = rt.localPosition;

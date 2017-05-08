@@ -6,6 +6,7 @@ public class CubeSkinManager : MonoBehaviour {
 
     const string PREFS_OPENED_SKINS = "openedSkins";
     const string PREFS_SELECTED_SKIN = "selectedSkin";
+    public static Quaternion zeroCubeRotation = Quaternion.Euler(-90, 0, 0);
 
     private Dictionary<string, bool> openedSkins = new Dictionary<string, bool>();
     private string selectedSkin;
@@ -71,6 +72,7 @@ public class CubeSkinManager : MonoBehaviour {
 
         foreach (var user in SkinUsers)
         {
+            user.GetComponent<MeshRenderer>().material.color = Color.clear;
             // clear children
             var children = new List<GameObject>();
             foreach (Transform child in user.transform)
@@ -82,8 +84,8 @@ public class CubeSkinManager : MonoBehaviour {
             skinParts.ForEach(part => {
                 var inst = Instantiate(part, user.transform);
                 inst.transform.localPosition = Vector3.zero;
-                inst.transform.localRotation = Quaternion.identity;
-                inst.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+                inst.transform.localRotation = zeroCubeRotation;
+                inst.transform.localScale = Vector3.one;
             });
         }
     }

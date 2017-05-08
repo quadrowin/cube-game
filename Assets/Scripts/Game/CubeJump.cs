@@ -92,7 +92,6 @@ public class CubeJump : MonoBehaviour
 
         if (state == STATE_JUMPING && rb.IsSleeping())
         {
-            mainCube.transform.localRotation = Quaternion.identity;
             reinitStartTime = Time.fixedTime;
             state = STATE_REINIT;
             reinitDeltaX = mainCube.transform.localPosition.x - fr.GetLastFloor().transform.localPosition.x;
@@ -140,7 +139,7 @@ public class CubeJump : MonoBehaviour
 
     public void OnCheeseTake()
     {
-        CheeseManager.CheeseIncrement();
+        CheeseManager.CheeseIncrement(1);
         var cheeseScores = CheeseManager.GetCheeseScores();
         cheeseScoresView.text = ": " + cheeseScores;
         mainCube.GetComponent<AudioSource>().PlayOneShot(eatingSound);
