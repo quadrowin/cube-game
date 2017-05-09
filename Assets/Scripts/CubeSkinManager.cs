@@ -35,7 +35,7 @@ public class CubeSkinManager : MonoBehaviour {
 	
 	public bool IsSkinOpened(string name)
     {
-        return openedSkins.ContainsKey(name);
+        return "" == name || openedSkins.ContainsKey(name);
     }
 
     public string GetSelectedSkinName()
@@ -59,11 +59,22 @@ public class CubeSkinManager : MonoBehaviour {
     public void OpenSkin(CubeSkinOption skin)
     {
         openedSkins.Add(skin.SkinName, true);
-        skin.SetOpened(true);
 
-        var openedSkinsNames = new string[openedSkins.Count];
-        openedSkins.Keys.CopyTo(openedSkinsNames, 0);
-        PlayerPrefs.SetString(PREFS_OPENED_SKINS, string.Join(",", openedSkinsNames));
+        string openedSkinsNames = "";
+        foreach (string skinName in openedSkins.Keys)
+        {
+            if (openedSkinsNames.Length > 0)
+            {
+                openedSkinsNames += "," + skinName;
+            }
+            else
+            {
+                openedSkinsNames = skinName;
+            }
+        }
+        PlayerPrefs.SetString(PREFS_OPENED_SKINS, openedSkinsNames);
+
+        skin.SetOpened(true);
     }
 
     public void SetSelectedSkin(string name)
