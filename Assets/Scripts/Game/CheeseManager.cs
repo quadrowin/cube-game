@@ -6,25 +6,25 @@ public class CheeseManager : MonoBehaviour {
 
     const string PREFS_CHEESE_SCORES = "scheeseScores";
 
-    private int cheeseScores = 0;
+    public int CheeseScores = 0;
 
     void Start () {
-        cheeseScores = PlayerPrefs.GetInt(PREFS_CHEESE_SCORES);
+        CheeseScores = PlayerPrefs.GetInt(PREFS_CHEESE_SCORES);
     }
 	
 	public void CheeseIncrement (int val) {
-        cheeseScores += val;
-        PlayerPrefs.SetInt(PREFS_CHEESE_SCORES, cheeseScores);
+        CheeseScores += val;
+        PlayerPrefs.SetInt(PREFS_CHEESE_SCORES, CheeseScores);
     }
 
     public void CheeseDecrement(int val)
     {
-        cheeseScores -= val;
-        PlayerPrefs.SetInt(PREFS_CHEESE_SCORES, cheeseScores);
+        CheeseScores -= val;
+        PlayerPrefs.SetInt(PREFS_CHEESE_SCORES, CheeseScores);
     }
 
     public int GetCheeseScores()
     {
-        return cheeseScores;
+        return CheeseScores;
     }
 }

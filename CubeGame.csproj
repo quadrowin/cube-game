@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BuySkinClick.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
@@ -273,7 +274,7 @@
     <Compile Include="Assets\Scripts\CheeseVideoButton.cs" />
     <Compile Include="Assets\Scripts\CubeSkinFocus.cs" />
     <Compile Include="Assets\Scripts\CubeSkinManager.cs" />
-    <Compile Include="Assets\Scripts\CubeSkinSelect.cs" />
+    <Compile Include="Assets\Scripts\CubeSkinOption.cs" />
     <Compile Include="Assets\Scripts\EscapeToQuit.cs" />
     <Compile Include="Assets\Scripts\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Game\CheeseEating.cs" />

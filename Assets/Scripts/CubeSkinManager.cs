@@ -10,9 +10,9 @@ public class CubeSkinManager : MonoBehaviour {
 
     private Dictionary<string, bool> openedSkins = new Dictionary<string, bool>();
     private string selectedSkin;
-    private Dictionary<string, CubeSkinSelect> knownTemplates = new Dictionary<string, CubeSkinSelect>();
+    private Dictionary<string, CubeSkinOption> knownTemplates = new Dictionary<string, CubeSkinOption>();
 
-    public CubeSkinSelect DefaultSkinTpl;
+    public CubeSkinOption DefaultSkinTpl;
     public GameObject[] SkinUsers;
 	
 	void Start () {
@@ -24,7 +24,7 @@ public class CubeSkinManager : MonoBehaviour {
             openedSkins.Add(skin, true);
         }
 
-        foreach (var tpl in Resources.FindObjectsOfTypeAll<CubeSkinSelect>())
+        foreach (var tpl in Resources.FindObjectsOfTypeAll<CubeSkinOption>())
         {
             knownTemplates.Add(tpl.SkinName, tpl);
         }
@@ -42,17 +42,25 @@ public class CubeSkinManager : MonoBehaviour {
         return selectedSkin;
     }
 
-    public CubeSkinSelect GetSelectedSkinTpl()
+    public CubeSkinOption GetSelectedSkinTpl()
     {
         if (selectedSkin != "" && knownTemplates.ContainsKey(selectedSkin))
         {
-            CubeSkinSelect tpl;
+            CubeSkinOption tpl;
             if (knownTemplates.TryGetValue(selectedSkin, out tpl))
             {
                 return tpl;
             }
         }
         return DefaultSkinTpl;
+    }
+
+    public void OpenSkin(CubeSkinOption skin)
+    {
+        openedSkins.Add(skin.SkinName, true);
+        skin.SetOpened(true);
+
+//        PlayerPrefs.SetString(PREFS_OPENED_SKINS, string.Join(",", openedSkins.Keys));
     }
 
     public void SetSelectedSkin(string name)
@@ -67,6 +75,10 @@ public class CubeSkinManager : MonoBehaviour {
         var skinParts = new List<GameObject>();
         foreach (Transform child in GetSelectedSkinTpl().transform)
         {
+            if (child.tag == Tags.PADLOCK_CHEESE)
+            {
+                continue;
+            }
             skinParts.Add(child.gameObject);
         }
 

@@ -35,7 +35,7 @@ public class ShopScreen : MonoBehaviour {
                 go.SetActive(false);
             }
         }
-        CheeseCountText.GetComponent<Text>().text = "x " + CheeseManager.GetCheeseScores();
+        UpdateCheeseCount();
 
         foreach (GameObject go in ObjectsActivate)
         {
@@ -43,13 +43,13 @@ public class ShopScreen : MonoBehaviour {
         }
 
         var skinName = SkinManager.GetSelectedSkinName();
-        var options = SkinsOptionsOwner.GetComponentsInChildren<CubeSkinSelect>(false);
+        var options = SkinsOptionsOwner.GetComponentsInChildren<CubeSkinOption>(false);
         foreach (var skin in options)
         {
+            skin.SetOpened(SkinManager.IsSkinOpened(skin.SkinName));
             if (skin.SkinName == skinName)
             {
                 SkinSelectFrame.GetComponent<RectTransform>().localPosition = skin.GetComponent<RectTransform>().localPosition;
-                break;
             }
         }
     }
@@ -65,6 +65,11 @@ public class ShopScreen : MonoBehaviour {
         {
             go.SetActive(true);
         }
+    }
+
+    public void UpdateCheeseCount()
+    {
+        CheeseCountText.GetComponent<Text>().text = "x " + CheeseManager.GetCheeseScores();
     }
 
 }

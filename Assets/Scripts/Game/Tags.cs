@@ -10,4 +10,6 @@ public class Tags : MonoBehaviour {
 
     public const string FLOOR = "floor";
 
+    public const string PADLOCK_CHEESE = "PadlockCheese";
+
 }
