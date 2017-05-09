@@ -19,6 +19,7 @@ public class CubeSkinManager : MonoBehaviour {
         selectedSkin = PlayerPrefs.GetString(PREFS_SELECTED_SKIN);
 
         var saved = PlayerPrefs.GetString(PREFS_OPENED_SKINS);
+        print("OpenedSkins: " + saved);
         foreach (var skin in saved.Split(','))
         {
             openedSkins.Add(skin, true);
@@ -60,7 +61,9 @@ public class CubeSkinManager : MonoBehaviour {
         openedSkins.Add(skin.SkinName, true);
         skin.SetOpened(true);
 
-//        PlayerPrefs.SetString(PREFS_OPENED_SKINS, string.Join(",", openedSkins.Keys));
+        var openedSkinsNames = new string[openedSkins.Count];
+        openedSkins.Keys.CopyTo(openedSkinsNames, 0);
+        PlayerPrefs.SetString(PREFS_OPENED_SKINS, string.Join(",", openedSkinsNames));
     }
 
     public void SetSelectedSkin(string name)

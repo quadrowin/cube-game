@@ -12,9 +12,7 @@ public class TapToPlay : MonoBehaviour {
     const int STUDY_STATE_NONE = 0;
     const int STUDY_STATE_ACTIVE = 1;
     const int STUDY_STATE_SHOWED = 2;
-
-    public GameObject buttons;
-    public GameObject gameName;
+    
     public GameObject howToPlayHint;
     public GameObject startGameButton;
     public GameObject mainCube;
@@ -24,6 +22,7 @@ public class TapToPlay : MonoBehaviour {
     public GameObject cheeseTitle;
     public GameObject cheeseScores;
     public CheeseManager CheeseManager;
+    public MainScreen MainScreen;
 
     private bool clicked = false;
     private int gameStartStep = 0;
@@ -31,7 +30,6 @@ public class TapToPlay : MonoBehaviour {
     private float gameStartDuration = 1f;
     private Quaternion zeroRoration = Quaternion.identity;
     private Vector3 zeroPosition = new Vector3(0, -1, 0);
-    private Vector3 gameNameInGamePosition = new Vector3(0, 300, 0);
     private int studyState = STUDY_STATE_NONE;
 
     // like values in CubeJump
@@ -46,7 +44,7 @@ public class TapToPlay : MonoBehaviour {
         }
         clicked = true;
         startGameButton.gameObject.SetActive(false);
-        buttons.GetComponent<Animation>().Play("MainButtonsHide");
+        MainScreen.HideMainMenu();
         floorBlock.GetComponent<Animation>().Play("FloorBlockDriveIn");
         mainCube.GetComponent<Animation>().Stop();
         mainCube.GetComponent<Rigidbody>().useGravity = false;
@@ -92,10 +90,8 @@ public class TapToPlay : MonoBehaviour {
                 float timeFactor = gameStartPast / gameStartDuration / 2;
                 tr.localRotation = Quaternion.Lerp(tr.localRotation, zeroRoration, timeFactor);
                 tr.localPosition = Vector3.Lerp(tr.localPosition, zeroPosition, timeFactor);
-                gameName.GetComponent<RectTransform>().localPosition = Vector3.Lerp(gameName.GetComponent<RectTransform>().localPosition, gameNameInGamePosition, timeFactor);
                 return;
             }
-
             tr.SetPositionAndRotation(zeroPosition, zeroRoration);
 
             gameStartStep = STEP_TO_START;
@@ -129,6 +125,7 @@ public class TapToPlay : MonoBehaviour {
             gameStartStep = STEP_NONE;
             GetComponent<CubeJump>().active = true;
             GetComponent<SpawnBlocks>().enabled = true;
+            MainScreen.ShowGameInterface();
         }
     }
 

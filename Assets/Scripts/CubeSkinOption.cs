@@ -11,17 +11,6 @@ public class CubeSkinOption : MonoBehaviour {
 
     private GameObject Padlock;
 
-    private void Start()
-    {
-        foreach (Transform tr in transform)
-        {
-            if (tr.tag == Tags.PADLOCK_CHEESE)
-            {
-                Padlock = tr.gameObject;
-            }
-        }
-    }
-
     void OnMouseUpAsButton()
     {
         FocusHandler.SelectSkinOf(this);
@@ -29,10 +18,26 @@ public class CubeSkinOption : MonoBehaviour {
 
     public void SetOpened(bool opened)
     {
-        if (Padlock != null)
+        var padlock = GetPadlock();
+        if (padlock != null)
         {
-            Padlock.SetActive(!opened);
+            padlock.SetActive(!opened);
         }
+    }
+
+    GameObject GetPadlock()
+    {
+        if (Padlock == null)
+        {
+            foreach (Transform tr in transform)
+            {
+                if (tr.tag == Tags.PADLOCK_CHEESE)
+                {
+                    Padlock = tr.gameObject;
+                }
+            }
+        }
+        return Padlock;
     }
 
     public string GetSkinTitle()

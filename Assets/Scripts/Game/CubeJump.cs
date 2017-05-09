@@ -18,10 +18,13 @@ public class CubeJump : MonoBehaviour
 
     public bool active = false;
     public GameObject mainCube;
-    public GameObject mainButtons;
+    public MainScreen MainScreen;
+
+    public GameObject looseBackground;
     public GameObject looseButtons;
-    public AudioClip floorDownSound;
     public AudioClip looseSound;
+
+    public AudioClip floorDownSound;
     public AudioClip eatingSound;
     public AudioClip jumpSound;
     public Text currentScoresView;
@@ -183,7 +186,7 @@ public class CubeJump : MonoBehaviour
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
 
-        mainButtons.GetComponent<ScrollObjects>().MoveToPosition(Vector3.zero);
+        looseBackground.SetActive(true);
         looseButtons.SetActive(true);
         looseButtons.transform.localPosition = new Vector3(0, -300, looseButtons.transform.localPosition.z);
         looseButtons.GetComponent<ScrollObjects>().MoveToPosition(
@@ -191,6 +194,8 @@ public class CubeJump : MonoBehaviour
         );
 
         mainCube.GetComponent<AudioSource>().PlayOneShot(looseSound);
+        MainScreen.HideGameInterface();
+        MainScreen.ShowMainMenu();
     }
 
     void setGameScores(int newValue)

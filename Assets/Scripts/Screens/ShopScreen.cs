@@ -44,14 +44,17 @@ public class ShopScreen : MonoBehaviour {
 
         var skinName = SkinManager.GetSelectedSkinName();
         var options = SkinsOptionsOwner.GetComponentsInChildren<CubeSkinOption>(false);
+        CubeSkinOption activeSkin = SkinManager.GetSelectedSkinTpl();
         foreach (var skin in options)
         {
             skin.SetOpened(SkinManager.IsSkinOpened(skin.SkinName));
             if (skin.SkinName == skinName)
             {
-                SkinSelectFrame.GetComponent<RectTransform>().localPosition = skin.GetComponent<RectTransform>().localPosition;
+                activeSkin = skin;
             }
         }
+
+        SkinSelectFrame.GetComponent<CubeSkinFocus>().SelectSkinOf(activeSkin);
     }
 
     public void BackScreenAsItWas()
