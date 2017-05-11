@@ -78,8 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BuySkinClick.cs" />
-    <Compile Include="Assets\EscapeToBack.cs" />
+    <Compile Include="Assets\GPGSIds.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
@@ -271,13 +270,16 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+    <Compile Include="Assets\Scripts\Animation\FadeAnimation.cs" />
+    <Compile Include="Assets\Scripts\Animation\ScrollObjects.cs" />
     <Compile Include="Assets\Scripts\BuildTimeText.cs" />
+    <Compile Include="Assets\Scripts\BuySkinClick.cs" />
     <Compile Include="Assets\Scripts\CheeseVideoButton.cs" />
     <Compile Include="Assets\Scripts\CubeSkinFocus.cs" />
     <Compile Include="Assets\Scripts\CubeSkinManager.cs" />
     <Compile Include="Assets\Scripts\CubeSkinOption.cs" />
+    <Compile Include="Assets\Scripts\EscapeToBack.cs" />
     <Compile Include="Assets\Scripts\EscapeToQuit.cs" />
-    <Compile Include="Assets\Scripts\GPGSIds.cs" />
     <Compile Include="Assets\Scripts\Game\CheeseEating.cs" />
     <Compile Include="Assets\Scripts\Game\CheeseManager.cs" />
     <Compile Include="Assets\Scripts\Game\CubeJump.cs" />
@@ -291,13 +293,14 @@
     <Compile Include="Assets\Scripts\Menu\MainMenuClick.cs" />
     <Compile Include="Assets\Scripts\Menu\PlayGames.cs" />
     <Compile Include="Assets\Scripts\Menu\RestartClick.cs" />
-    <Compile Include="Assets\Scripts\Menu\ScrollObjects.cs" />
     <Compile Include="Assets\Scripts\Menu\SoundButton.cs" />
     <Compile Include="Assets\Scripts\Menu\TapToPlay.cs" />
     <Compile Include="Assets\Scripts\OkStoreButton.cs" />
     <Compile Include="Assets\Scripts\PanelBlinking.cs" />
     <Compile Include="Assets\Scripts\Screens\MainScreen.cs" />
     <Compile Include="Assets\Scripts\Screens\ShopScreen.cs" />
+    <Compile Include="Assets\Scripts\SpawnStars.cs" />
+    <Compile Include="Assets\Scripts\StarAnimation.cs" />
     <Compile Include="Assets\Scripts\StartAppAd.cs" />
     <Compile Include="Assets\Scripts\StartAppBackPlugin.cs" />
     <Compile Include="Assets\Scripts\StartAppWrapper.cs" />

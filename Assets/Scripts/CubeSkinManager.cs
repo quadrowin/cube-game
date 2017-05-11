@@ -61,10 +61,12 @@ public class CubeSkinManager : MonoBehaviour {
         openedSkins.Add(skin.SkinName, true);
 
         string openedSkinsNames = "";
+        int skinsCount = 0;
         foreach (string skinName in openedSkins.Keys)
         {
             if (openedSkinsNames.Length > 0)
             {
+                skinsCount++;
                 openedSkinsNames += "," + skinName;
             }
             else
@@ -75,6 +77,15 @@ public class CubeSkinManager : MonoBehaviour {
         PlayerPrefs.SetString(PREFS_OPENED_SKINS, openedSkinsNames);
 
         skin.SetOpened(true);
+
+        if (skinsCount >= 5)
+        {
+            PlayGames.UnlockAchievement(GPGSIds.achievement_cube_collector);
+        }
+        if (skinsCount >= 9)
+        {
+            PlayGames.UnlockAchievement(GPGSIds.achievement_cube_master);
+        }
     }
 
     public void SetSelectedSkin(string name)

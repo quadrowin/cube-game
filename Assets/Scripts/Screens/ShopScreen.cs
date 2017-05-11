@@ -43,7 +43,7 @@ public class ShopScreen : MonoBehaviour {
         }
 
         var skinName = SkinManager.GetSelectedSkinName();
-        var options = SkinsOptionsOwner.GetComponentsInChildren<CubeSkinOption>(false);
+        var options = SkinsOptionsOwner.GetComponentsInChildren<CubeSkinOption>(true);
         CubeSkinOption activeSkin = SkinManager.GetSelectedSkinTpl();
         foreach (var skin in options)
         {

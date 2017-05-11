@@ -111,6 +111,15 @@ public class CubeJump : MonoBehaviour
                 PlayGames.IncrementAchievement(GPGSIds.achievement_accurate_jumper, 1);
                 setGameScores(currentScores + 1);
                 mainCube.GetComponent<AudioSource>().PlayOneShot(floorDownSound);
+
+                if (currentScores >= 5)
+                {
+                    PlayGames.UnlockAchievement(GPGSIds.achievement_lucky_landing);
+                }
+                if (currentScores >= 10)
+                {
+                    PlayGames.UnlockAchievement(GPGSIds.achievement_professional_landing);
+                }
             }
             return;
         }
@@ -186,11 +195,12 @@ public class CubeJump : MonoBehaviour
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
 
-        looseBackground.SetActive(true);
+        looseBackground.GetComponent<FadeAnimation>().FadeIn();
+        var anchPos = looseButtons.GetComponent<RectTransform>().anchoredPosition3D;
+        looseButtons.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(anchPos.x, -300, anchPos.z);
         looseButtons.SetActive(true);
-        looseButtons.transform.localPosition = new Vector3(0, -300, looseButtons.transform.localPosition.z);
-        looseButtons.GetComponent<ScrollObjects>().MoveToPosition(
-            new Vector3(0, -50, looseButtons.transform.localPosition.z)
+        looseButtons.GetComponent<ScrollObjects>().MoveToAnchorPosition(
+            new Vector3(anchPos.x, 450, anchPos.z)
         );
 
         mainCube.GetComponent<AudioSource>().PlayOneShot(looseSound);

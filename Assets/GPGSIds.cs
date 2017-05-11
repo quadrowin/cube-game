@@ -24,12 +24,16 @@
 
 public static class GPGSIds
 {
+        public const string achievement_lucky_landing = "CgkItqH7hZcBEAIQCQ"; // <GPGSID>
+        public const string achievement_professional_landing = "CgkItqH7hZcBEAIQCg"; // <GPGSID>
+        public const string achievement_cube_collector = "CgkItqH7hZcBEAIQBw"; // <GPGSID>
+        public const string event_take_a_cube_skin = "CgkItqH7hZcBEAIQBg"; // <GPGSID>
+        public const string achievement_cube_master = "CgkItqH7hZcBEAIQCA"; // <GPGSID>
+        public const string achievement_accurate_jumper = "CgkItqH7hZcBEAIQBA"; // <GPGSID>
         public const string leaderboard_jumping_off_height = "CgkItqH7hZcBEAIQAQ"; // <GPGSID>
         public const string event_take_cheese = "CgkItqH7hZcBEAIQBQ"; // <GPGSID>
-        public const string event_take_a_cube_skin = "CgkItqH7hZcBEAIQBg"; // <GPGSID>
-        public const string achievement_accurate_jumper = "CgkItqH7hZcBEAIQBA"; // <GPGSID>
-        public const string achievement_cheese_taker = "CgkItqH7hZcBEAIQAA"; // <GPGSID>
         public const string leaderboard_success_touchdowns = "CgkItqH7hZcBEAIQAg"; // <GPGSID>
+        public const string achievement_cheese_taker = "CgkItqH7hZcBEAIQAA"; // <GPGSID>
 
 }
 
