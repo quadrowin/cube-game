@@ -94,3 +94,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeedX: 2
   MaxSpeedY: 2
+  LiveTime: 3

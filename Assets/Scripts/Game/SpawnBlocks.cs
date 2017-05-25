@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnBlocks : MonoBehaviour {
 
@@ -44,6 +45,8 @@ public class SpawnBlocks : MonoBehaviour {
         blockInst = Instantiate(block, gameSpace.transform) as GameObject;
         blockInst.transform.localPosition = zeroPosition;
         blockInst.transform.localRotation = Quaternion.identity;
+        var front = blockInst.transform.Find("Front");
+        front.GetComponent<MeshRenderer>().material.SetTextureOffset("_MainTex", new Vector2(-Random.Range(1, 100) / 100f, 0));
         targetPosition = new Vector3(Random.Range(1, 3), Random.Range(-2, 0), 0);
         UpdateCheesePosition();
         cheeseInst = Instantiate(cheese, blockInst.transform.parent) as GameObject;

@@ -109,7 +109,8 @@ public class CubeSkinManager : MonoBehaviour {
 
         foreach (var user in SkinUsers)
         {
-            user.GetComponent<MeshRenderer>().material.color = Color.clear;
+            // hide base cube
+            user.GetComponent<MeshRenderer>().enabled = false;
             // clear children
             var children = new List<GameObject>();
             foreach (Transform child in user.transform)
@@ -124,6 +125,7 @@ public class CubeSkinManager : MonoBehaviour {
                 inst.transform.localRotation = zeroCubeRotation;
                 inst.transform.localScale = Vector3.one;
             });
+            
         }
     }
 

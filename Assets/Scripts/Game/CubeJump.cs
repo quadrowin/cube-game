@@ -54,10 +54,16 @@ public class CubeJump : MonoBehaviour
     private Vector3 removeFloorPosition = new Vector3(-7, 11, 0);
     private Vector3 jumpStartPosition = Vector3.zero;
 
-    private void Start()
+    public void InvlidateScores()
     {
         recordScores = PlayerPrefs.GetInt(PREFS_RECORD_SCORES);
-        recordScoresView.text = "Record: " + recordScores;
+        recordScoresView.text = I18nManager.__("Record") + ": " + recordScores;
+        currentScoresView.text = I18nManager.__("Scores") + ": " + currentScores;
+    }
+
+    private void Start()
+    {
+        InvlidateScores();
     }
 
     public void FixedUpdate()
@@ -211,11 +217,11 @@ public class CubeJump : MonoBehaviour
     void setGameScores(int newValue)
     {
         currentScores = newValue;
-        currentScoresView.text = "Scores: " + currentScores;
+        currentScoresView.text = I18nManager.__("Scores") + ": " + currentScores;
         if (newValue > recordScores)
         {
             recordScores = newValue;
-            recordScoresView.text = "Record: " + recordScores;
+            recordScoresView.text = I18nManager.__("Record") + ": " + recordScores;
             PlayerPrefs.SetInt(PREFS_RECORD_SCORES, recordScores);
         }
     }

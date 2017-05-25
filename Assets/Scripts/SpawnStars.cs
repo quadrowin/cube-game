@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SpawnStars : MonoBehaviour {
 
-    public GameObject Star;
+    public GameObject StarPrefab;
+
+    public float StartLifeTime = 3f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,9 +22,10 @@ public class SpawnStars : MonoBehaviour {
                 Random.Range(0, Screen.height),
                 Camera.main.farClipPlane / 2
             ));
-            var newStar = Instantiate(Star);
+            var newStar = Instantiate(StarPrefab);
             newStar.transform.localPosition = pos;
-            yield return new WaitForSeconds(5.01f);
+            DestroyObject(newStar, StartLifeTime);
+            yield return new WaitForSeconds(StartLifeTime + .2f);
         }
 	}
 }

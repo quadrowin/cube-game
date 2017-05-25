@@ -13,11 +13,11 @@ public class GooglePlayButton : MonoBehaviour {
         instances.Add(this);
         UpdateSelfState();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    void OnMouseUpAsButton()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.quadrowin.jumpingoff");
+    }
 
     void UpdateSelfState()
     {

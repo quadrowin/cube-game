@@ -124,6 +124,7 @@ public class TapToPlay : MonoBehaviour {
             mainCube.GetComponent<Rigidbody>().useGravity = true;
             gameStartStep = STEP_NONE;
             GetComponent<CubeJump>().active = true;
+            GetComponent<CubeJump>().InvlidateScores();
             GetComponent<SpawnBlocks>().enabled = true;
             MainScreen.ShowGameInterface();
         }
