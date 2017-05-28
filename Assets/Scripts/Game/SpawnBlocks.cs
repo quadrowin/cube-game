@@ -47,6 +47,7 @@ public class SpawnBlocks : MonoBehaviour {
         blockInst.transform.localRotation = Quaternion.identity;
         var front = blockInst.transform.Find("Front");
         front.GetComponent<MeshRenderer>().material.SetTextureOffset("_MainTex", new Vector2(-Random.Range(1, 100) / 100f, 0));
+        front.GetComponent<MeshRenderer>().material.SetTextureScale("_MainTex", new Vector2(Random.Range(1, 3) > 1 ? .25f : -.25f, 1));
         targetPosition = new Vector3(Random.Range(1, 3), Random.Range(-2, 0), 0);
         UpdateCheesePosition();
         cheeseInst = Instantiate(cheese, blockInst.transform.parent) as GameObject;

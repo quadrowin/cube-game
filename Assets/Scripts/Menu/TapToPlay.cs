@@ -16,7 +16,7 @@ public class TapToPlay : MonoBehaviour {
     public GameObject howToPlayHint;
     public GameObject startGameButton;
     public GameObject mainCube;
-    public GameObject floorBlock;
+    public GameObject FloorBlockPrefab;
     public GameObject currentScores;
     public GameObject recordScores;
     public GameObject cheeseTitle;
@@ -25,6 +25,7 @@ public class TapToPlay : MonoBehaviour {
     public MainScreen MainScreen;
 
     private bool clicked = false;
+    private GameObject FirstFloorBlock;
     private int gameStartStep = 0;
     private float gameStartTime = 0;
     private float gameStartDuration = 1f;
@@ -45,7 +46,8 @@ public class TapToPlay : MonoBehaviour {
         clicked = true;
         startGameButton.gameObject.SetActive(false);
         MainScreen.HideMainMenu();
-        floorBlock.GetComponent<Animation>().Play("FloorBlockDriveIn");
+        FirstFloorBlock = Instantiate(FloorBlockPrefab, mainCube.transform.parent);
+        FirstFloorBlock.transform.localPosition = new Vector3(0, -7, 0);
         mainCube.GetComponent<Animation>().Stop();
         mainCube.GetComponent<Rigidbody>().useGravity = false;
         mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -104,7 +106,7 @@ public class TapToPlay : MonoBehaviour {
             // двигаем главный куб и первую плашку влево вверх
             mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
             Transform cubeTr = mainCube.GetComponent<Transform>();
-            Transform floorTr = floorBlock.GetComponent<Transform>();
+            Transform floorTr = FirstFloorBlock.GetComponent<Transform>();
             mainCube.GetComponent<Rigidbody>().velocity = Vector3.zero;
             mainCube.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             float gameStartPast = Time.fixedTime - gameStartTime;
@@ -135,7 +137,7 @@ public class TapToPlay : MonoBehaviour {
         GameObject floor = mainCube.GetComponent<FloorReminder>().GetLastFloor();
         if (!floor)
         {
-            floor = floorBlock;
+            floor = FirstFloorBlock;
         }
         var newCubePosition = new Vector3(
             startCubePosition.x + deltaX,
