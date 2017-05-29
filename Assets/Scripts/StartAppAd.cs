@@ -27,6 +27,18 @@ public class StartAppAd : MonoBehaviour {
         }
     }
 
+    public class AdEventListenerImplementation: StartAppWrapper.AdEventListener
+    {
+        public void onReceiveAd()
+        {
+            StartAppWrapper.showAd();
+        }
+        public void onFailedToReceiveAd()
+        {
+
+        }
+    }
+
     void SetVideoListener()
     {
 #if UNITY_ANDROID
@@ -44,9 +56,8 @@ public class StartAppAd : MonoBehaviour {
 #if UNITY_ANDROID
         if (inited)
         {
-            StartAppWrapper.showAd();
             StartAppWrapper.setVideoListener(videoListener);
-            StartAppWrapper.loadAd(StartAppWrapper.AdMode.REWARDED_VIDEO);
+            StartAppWrapper.loadAd(StartAppWrapper.AdMode.REWARDED_VIDEO, new AdEventListenerImplementation());
         }
 #endif
     }
